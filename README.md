@@ -6,6 +6,14 @@ for the NPU. A python script which runs on 8MPlus is also provided to run the de
 and generates output onto the console. The script compares inference results from CPU (using XNNPack) and NPU (using VX delegate). Two sample models are also provided with the repo,
 but the modles and dataset could be generated using the colab notebook.
 
+# iMX8MPlus system configurations
+
+NAME="NXP i.MX Release Distro"
+
+VERSION="5.10-hardknott (hardknott)"
+
+Kernel: Linux 5.10.72+g2e6a992bbb32
+
 # Problem with default upsampling layer
 The repo highlights the fact that using the default interpolation in upsampling layer i.e., 'nearest' results in a tflite model which runs on CPU/XNNPack, but the model does not run
 on NPU/VX delegate. The model generates 'fixed' results when running on NPU. On the other hand, if 'bilinear' interpolation is used in the upsampling layer, the model runs wihtout any
