@@ -6,6 +6,7 @@ import numpy as np
 import tflite_runtime.interpreter as tflite_rt
 import pickle
 import os
+import argparse
 
 # @function for single sample based inference
 # interpreter -> laoded model as interpreter
@@ -24,7 +25,15 @@ def run_inference_using_interpreter(interpreter, sample):
 	return prdctd_label, inference_time_ms
 	
 ########### Main program #############
-tflite_model = "mnist_bilinear_demo_ptq.tflite"
+parser = argparse.ArgumentParser()
+parser.add_argument(
+  '-m',
+  '--model',
+  default='mnist_bilinear_demo_ptq',
+  help='model to test, bilinear or nearest')
+user_args = parser.parse_args()
+  
+tflite_model = user_args.model + ".tflite"
 images_labels = "mnist_samples_labels"	
 
 print('\t\t\t\t\t---------------------------------------------- Loading demo dataset ---------------------------------------')
@@ -45,7 +54,7 @@ for loop_var in range(len(samples)):
 	sample_for_inf = samples[loop_var].reshape(1,28,28,1)
 	pred, time_ms = run_inference_using_interpreter(interpreter_cpu_xnn,sample_for_inf)
 	pred= np.array(pred)
-	print("predictions ->", pred, "\n\t\ttrue_label ->", labels[loop_var], "predicted_label ->", pred.argmax(), "inf. time ->", time_ms)
+	print("\n\t\ttrue_label ->", labels[loop_var], "predicted_label ->", pred.argmax(), "inf. time (msec) ->", time_ms)
 
 print('\t\t\t\t\t---------------------------------------------- Loading model with VX delegate for NPU ---------------------------------------')	
 ext_delegate =  [ tflite_rt.load_delegate('/usr/lib/libvx_delegate.so') ]
@@ -59,5 +68,5 @@ for loop_var in range(len(samples)):
 	sample_for_inf = samples[loop_var].reshape(1,28,28,1)
 	pred, time_ms = run_inference_using_interpreter(interpreter_npu_vx,sample_for_inf)
 	pred= np.array(pred)
-	print("predictions ->", pred, "\n\t\ttrue_label ->", labels[loop_var], "predicted_label ->", pred.argmax(), "inf. time ->", time_ms)
+	print("\n\t\ttrue_label ->", labels[loop_var], "predicted_label ->", pred.argmax(), "inf. time (msec) ->", time_ms)
 
