@@ -8,11 +8,13 @@ but the modles and dataset could be generated using the colab notebook.
 
 # iMX8MPlus system configurations
 
-NAME="NXP i.MX Release Distro"
+NAME = "NXP i.MX Release Distro"
 
-VERSION="5.10-hardknott (hardknott)"
+VERSION = "5.10-hardknott (hardknott)"
 
-Kernel: Linux 5.10.72+g2e6a992bbb32
+Kernel = Linux 5.10.72+g2e6a992bbb32
+
+tflite_tuntime version = 2.8.0
 
 # Problem with default upsampling layer
 The repo highlights the fact that using the default interpolation in upsampling layer i.e., 'nearest' results in a tflite model which runs on CPU/XNNPack, but the model does not run
