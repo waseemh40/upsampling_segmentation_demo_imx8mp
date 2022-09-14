@@ -1,7 +1,7 @@
 # Demo for running segmentation models on iMX8MPlus SoC
 # Introduction
 A repository demonstrating use of upsampling layer for segmentation models on NXP's iM8M Plus SoC using MNIST dataset. The repo contains a colab notebook for training
-a segmentation model with upsampling layer and MNIST datset. In addition, the notebook also demonstrates post-training quantiation of the trained model into INT8 format
+a segmentation model with upsampling layer and MNIST datset. In addition, the notebook also demonstrates post-training quantization of the trained model into INT8 format
 for the NPU. A python script which runs on 8MPlus is also provided to run the demo. The script takes a model (tflite) and samples of MNIST dataset (images) as input
 and generates output onto the console. The script compares inference results from CPU (using XNNPack) and NPU (using VX delegate). Two sample models are also provided with the repo,
 but the modles and dataset could be generated using the colab notebook.
